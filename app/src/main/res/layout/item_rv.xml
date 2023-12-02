@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/home_background"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/item_image"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:src="@drawable/ic_flower"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/back_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_arrow"
+        app:layout_constraintStart_toStartOf="@id/item_image"
+        app:layout_constraintTop_toTopOf="@id/item_image"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="50dp"/>
+
+    <TextView
+        android:id="@+id/title_flower"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Marble Flower Vase"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        app:layout_constraintTop_toBottomOf="@id/item_image"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="20dp"/>
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/heart_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_favorite"
+        app:layout_constraintTop_toTopOf="@id/title_flower"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/title_flower"
+        android:layout_marginEnd="20dp"/>
+    <TextView
+        android:id="@+id/sells_flower"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="8,9999 sold"
+        android:padding="5dp"
+        android:textSize="10sp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/rounded_corners"
+        android:textColor="@color/text_gray"
+        app:layout_constraintTop_toBottomOf="@id/title_flower"
+        app:layout_constraintStart_toStartOf="@id/title_flower"/>
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/star_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/sells_flower"
+        app:layout_constraintTop_toTopOf="@id/sells_flower"
+        app:layout_constraintBottom_toBottomOf="@id/sells_flower"
+        android:src="@drawable/ic_star"
+        android:layout_marginStart="10dp"/>
+    <TextView
+        android:id="@+id/score_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="4.7"
+        android:textColor="@color/text_gray"
+        app:layout_constraintStart_toEndOf="@id/star_img"
+        app:layout_constraintTop_toTopOf="@id/star_img"
+        app:layout_constraintBottom_toBottomOf="@id/star_img"
+        android:layout_marginStart="10dp"/>
+
+    <TextView
+        android:id="@+id/reviews_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="(7,700 reviews)"
+        android:layout_marginStart="10dp"
+        app:layout_constraintStart_toEndOf="@id/score_tv"
+        app:layout_constraintTop_toTopOf="@id/score_tv"
+        app:layout_constraintBottom_toBottomOf="@id/score_tv"/>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="@id/sells_flower"
+        app:layout_constraintTop_toBottomOf="@id/sells_flower"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/view_gray"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
