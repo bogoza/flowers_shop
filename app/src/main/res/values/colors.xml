@@ -6,4 +6,11 @@
     <color name="home_background">#181A21</color>
     <color name="text_gray">#B8B8B8</color>
     <color name="view_gray">#2D3037</color>
+    <color name="circle_white">#E0E0E0</color>
+    <color name="circle_gray">#607D89</color>
+    <color name="circle_dark">#393939</color>
+    <color name="circle_light_dark">#616161</color>
+    <color name="circle_purple">#673AB2</color>
+    <color name="circle_blue">#3E50B2</color>
+    <color name="circle_pink">#3E50B2</color>
 </resources>

@@ -1,6 +1,8 @@
 package com.example.flowersshop.fragments
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -19,12 +21,12 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val allFlowers = listOf(
-        FlowersData(UUID.randomUUID(), "https://www.shutterstock.com/shutterstock/photos/2242095875/display_1500/stock-photo-watercolor-illustration-of-a-sakura-branch-in-a-transparent-vase-isolated-on-a-white-background-2242095875.jpg","first flower","${Random.nextInt(1, 5)},","${Random.nextInt(100, 10000)}","$${Random.nextInt(50, 250)}"),
-        FlowersData(UUID.randomUUID(), "https://www.shutterstock.com/shutterstock/photos/2240890637/display_1500/stock-photo-watercolor-illustration-of-a-sakura-branch-in-a-transparent-vase-isolated-on-a-white-background-2240890637.jpg","first flower","${Random.nextInt(1, 5)}","${Random.nextInt(100, 10000)}","$${Random.nextInt(50, 250)}"),
-        FlowersData(UUID.randomUUID(), "https://www.shutterstock.com/shutterstock/photos/2156621139/display_1500/stock-photo--d-illustration-flowers-vase-decoration-isolated-on-white-background-2156621139.jpg","first flower","${Random.nextInt(1, 5)}","${Random.nextInt(100, 10000)}","$${Random.nextInt(50, 250)}"),
         FlowersData(UUID.randomUUID(), "https://www.shutterstock.com/shutterstock/photos/2242095875/display_1500/stock-photo-watercolor-illustration-of-a-sakura-branch-in-a-transparent-vase-isolated-on-a-white-background-2242095875.jpg","first flower","${Random.nextInt(1, 5)}","${Random.nextInt(100, 10000)}","$${Random.nextInt(50, 250)}"),
-        FlowersData(UUID.randomUUID(), "https://www.shutterstock.com/shutterstock/photos/2242095875/display_1500/stock-photo-watercolor-illustration-of-a-sakura-branch-in-a-transparent-vase-isolated-on-a-white-background-2242095875.jpg","first flower","${Random.nextInt(1, 5)}","${Random.nextInt(100, 10000)}","$${Random.nextInt(50, 250)}"),
-        FlowersData(UUID.randomUUID(), "https://www.shutterstock.com/shutterstock/photos/2242095875/display_1500/stock-photo-watercolor-illustration-of-a-sakura-branch-in-a-transparent-vase-isolated-on-a-white-background-2242095875.jpg","first flower","${Random.nextInt(1, 5)}","${Random.nextInt(100, 10000)}","$${Random.nextInt(50, 250)}")
+        FlowersData(UUID.randomUUID(), "https://www.shutterstock.com/shutterstock/photos/2240890637/display_1500/stock-photo-watercolor-illustration-of-a-sakura-branch-in-a-transparent-vase-isolated-on-a-white-background-2240890637.jpg","second flower","${Random.nextInt(1, 5)}","${Random.nextInt(100, 10000)}","$${Random.nextInt(50, 250)}"),
+        FlowersData(UUID.randomUUID(), "https://www.shutterstock.com/shutterstock/photos/2156621139/display_1500/stock-photo--d-illustration-flowers-vase-decoration-isolated-on-white-background-2156621139.jpg","third flower","${Random.nextInt(1, 5)}","${Random.nextInt(100, 10000)}","$${Random.nextInt(50, 250)}"),
+        FlowersData(UUID.randomUUID(), "https://www.shutterstock.com/shutterstock/photos/2242095875/display_1500/stock-photo-watercolor-illustration-of-a-sakura-branch-in-a-transparent-vase-isolated-on-a-white-background-2242095875.jpg","fourth flower","${Random.nextInt(1, 5)}","${Random.nextInt(100, 10000)}","$${Random.nextInt(50, 250)}"),
+        FlowersData(UUID.randomUUID(), "https://www.shutterstock.com/shutterstock/photos/2242095875/display_1500/stock-photo-watercolor-illustration-of-a-sakura-branch-in-a-transparent-vase-isolated-on-a-white-background-2242095875.jpg","fifth flower","${Random.nextInt(1, 5)}","${Random.nextInt(100, 10000)}","$${Random.nextInt(50, 250)}"),
+        FlowersData(UUID.randomUUID(), "https://www.shutterstock.com/shutterstock/photos/2242095875/display_1500/stock-photo-watercolor-illustration-of-a-sakura-branch-in-a-transparent-vase-isolated-on-a-white-background-2242095875.jpg","sixth flower","${Random.nextInt(1, 5)}","${Random.nextInt(100, 10000)}","$${Random.nextInt(50, 250)}")
     )
 
     private val itemList: MutableList<FlowersData> = mutableListOf()
@@ -51,14 +53,27 @@ class HomeFragment : Fragment() {
         adapter.setData(itemList)
         itemList.addAll(
             allFlowers
-//           listOf(FlowersData(
-//               image = "sdadas",
-//               title = "First Flower",
-//               score = Random.nextInt(1, 5).toString(),
-//               sells = Random.nextInt(100, 10000).toString(),
-//               price = "$${Random.nextInt(50, 200)}"
-//           ))
         )
+        binding.searchEt.addTextChangedListener(object :TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                //Not used
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                filterItems(s.toString())
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                //Not used
+            }
+
+        }
+        )
+    }
+    private fun filterItems(query: String){
+        val filteredList = allFlowers.filter { it.title.contains(query, ignoreCase = true) }
+        adapter.setData(filteredList)
+
     }
     override fun onDestroyView() {
         super.onDestroyView()

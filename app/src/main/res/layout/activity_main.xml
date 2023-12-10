@@ -7,62 +7,16 @@
     android:background="@color/home_background"
     tools:context=".MainActivity">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/arrow_imageview"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
-        android:src="@drawable/ic_arrow"
-        />
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView2"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         app:defaultNavHost="true"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginTop="15dp"
-        app:layout_constraintTop_toBottomOf="@id/arrow_imageview"
-        app:navGraph="@navigation/my_navigation"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp" />
-    <TextView
-        android:id="@+id/vase_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/vase"
-        android:textColor="@color/white"
-        android:textSize="25sp"
-        android:layout_marginStart="5dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@id/arrow_imageview"
-        app:layout_constraintTop_toTopOf="@id/arrow_imageview"
-        app:layout_constraintBottom_toBottomOf="@id/arrow_imageview"/>
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/search_ed"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/vase_tv"
-        app:layout_constraintEnd_toStartOf="@id/search_iv"
-        app:layout_constraintTop_toTopOf="@id/vase_tv"
-        app:layout_constraintBottom_toBottomOf="@id/vase_tv"
-        android:visibility="gone"
-        android:hint="@string/search"
-        android:padding="10dp"
-        android:textColorHint="@color/text_gray"/>
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/search_iv"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:src="@drawable/ic_search"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="20dp"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:navGraph="@navigation/my_navigation" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
