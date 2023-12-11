@@ -1,22 +1,20 @@
 package com.example.flowersshop.adapter
+
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.flowersshop.R
 import com.example.flowersshop.databinding.HomeRvBinding
-import com.example.flowersshop.fragments.HomeFragment
-import com.example.flowersshop.fragments.HomeFragmentDirections
 import com.example.flowersshop.model.FlowersData
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 
-class RecyclerViewAdapter:ListAdapter<FlowersData,RecyclerViewAdapter.MyViewHolder>(object :
-     DiffUtil.ItemCallback<FlowersData>(){
+class RecyclerViewAdapter : ListAdapter<FlowersData, RecyclerViewAdapter.MyViewHolder>(object :
+    DiffUtil.ItemCallback<FlowersData>() {
     override fun areItemsTheSame(oldItem: FlowersData, newItem: FlowersData): Boolean {
         return oldItem.id == newItem.id
     }
@@ -25,35 +23,50 @@ class RecyclerViewAdapter:ListAdapter<FlowersData,RecyclerViewAdapter.MyViewHold
         return oldItem == newItem
     }
 
+
 }) {
-    fun setData(item:List<FlowersData>){
-        submitList(item)
-        notifyDataSetChanged()
+
+    private var onItemClickListener:((flowers:FlowersData) ->Unit)? = null
+    fun setOnItemClickListener(listener:(flowers:FlowersData) -> Unit){
+        onItemClickListener = listener
     }
-   inner class MyViewHolder(private val binding:HomeRvBinding):RecyclerView.ViewHolder(binding.root){
-        fun bind(flower:FlowersData){
-            val navController: NavController? = null
+    fun setData(item: List<FlowersData>) {
+        submitList(item)
+    }
+
+    inner class MyViewHolder(private val binding: HomeRvBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(flower: FlowersData) {
             val item = currentList[adapterPosition]
             Picasso.get()
                 .load(flower.image)
                 .placeholder(R.drawable.ic_flower)
-                .into(binding.flowerImageview,object :Callback{
-                        override fun onSuccess() {
-                    // Image loaded successfully
-                    Log.d("Picasso", "Image loaded successfully")
-                }
+                .into(binding.flowerImageview, object : Callback {
+                    override fun onSuccess() {
+                        // Image loaded successfully
+                        Log.d("Picasso", "Image loaded successfully")
+                    }
 
-                        override fun onError(e: Exception?) {
-                    // Log the error
-                    Log.e("Picasso", "Error loading image", e)
-                }
-        })
+                    override fun onError(e: Exception?) {
+                        // Log the error
+                        Log.e("Picasso", "Error loading image", e)
+                    }
+                })
             binding.titleTv.text = item.title
             binding.scoreTv.text = item.score
             binding.sellsTextview.text = item.sells
             binding.priceTv.text = item.price
 
         }
+        fun listener(){
+            val item = currentList[adapterPosition]
+
+            binding.root.setOnClickListener {
+                onItemClickListener?.invoke(item)
+            }
+        }
+
 
     }
 
@@ -62,16 +75,15 @@ class RecyclerViewAdapter:ListAdapter<FlowersData,RecyclerViewAdapter.MyViewHold
         viewType: Int
     ): MyViewHolder {
         return MyViewHolder(
-            HomeRvBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+            HomeRvBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 
     override fun onBindViewHolder(holder: RecyclerViewAdapter.MyViewHolder, position: Int) {
         holder.bind(currentList[position])
-        holder.itemView.setOnClickListener(
+        holder.listener()
 
-            Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_detailFragment)
-        )
     }
+
 
 }

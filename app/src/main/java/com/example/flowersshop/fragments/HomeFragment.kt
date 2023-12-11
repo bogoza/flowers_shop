@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.flowersshop.adapter.RecyclerViewAdapter
@@ -46,11 +47,19 @@ class HomeFragment : Fragment() {
         makeFlowers()
     }
 
-    private fun makeFlowers(){
-       adapter = RecyclerViewAdapter()
+    private fun makeFlowers() {
+        adapter = RecyclerViewAdapter()
         binding.flowersRv.layoutManager = GridLayoutManager(requireContext(),2)
         binding.flowersRv.adapter = adapter
+        adapter.setOnItemClickListener {item ->
+            findNavController().navigate(
+                HomeFragmentDirections.actionHomeFragmentToDetailFragment(
+                    item
+                )
+            )
+        }
         adapter.setData(itemList)
+
         itemList.addAll(
             allFlowers
         )

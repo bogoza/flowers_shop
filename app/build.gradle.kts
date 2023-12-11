@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("androidx.navigation.safeargs")
+    id ("kotlin-parcelize")
 }
 
 android {
@@ -50,7 +51,7 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.5")//navigation
-    implementation("androidx.navigation:navigation-ui-ktx:2.7.5")//fragment
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.5")
 
     implementation("androidx.cardview:cardview:1.0.0")//cardView
 
